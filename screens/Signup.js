@@ -1,20 +1,37 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignupScreen = ({ navigation }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSignup = async () => {
+    if (!fullName || !email || !password) {
+      Alert.alert("Error", "All fields are required");
+      return;
+    }
+    
+    try {
+      await AsyncStorage.setItem("userFullName", fullName);
+      await AsyncStorage.setItem("userEmail", email);
+      await AsyncStorage.setItem("userPassword", password);
+      Alert.alert("Success", "Account created successfully");
+      navigation.replace("Login");
+    } catch (error) {
+      Alert.alert("Error", "Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <LinearGradient colors={["#FF6B6B", "#FF8E53"]} style={styles.container}>
       <View style={styles.content}>
         <Image source={require("../assets/FiestaCarts_logo.png")} style={styles.logo} />
-        <Text style={styles.title}>Join Fiesta Carts</Text>
-        <Text style={styles.subtitle}>Create an account to get started</Text>
+        <Text style={styles.title}>Create Account</Text>
+        <Text style={styles.subtitle}>Sign up to get started</Text>
 
         <TextInput
           style={styles.input}
@@ -39,23 +56,15 @@ const SignupScreen = ({ navigation }) => {
           onChangeText={setPassword}
           secureTextEntry
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
-          placeholderTextColor="#fff"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry
-        />
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}> 
+        <TouchableOpacity style={styles.button} onPress={handleSignup}>
           <Text style={styles.buttonText}>Sign Up</Text>
           <MaterialIcons name="arrow-forward-ios" size={24} color="white" style={styles.icon} />
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text style={styles.loginText}>Already have an account? Log in</Text>
+        <Text style={styles.loginText}>Already have an account? Login</Text>
       </TouchableOpacity>
     </LinearGradient>
   );
