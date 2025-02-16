@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "FiestaCarts",
+    "slug": "FiestaCarts",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/FiestaCarts_logo.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/FiestaCarts_logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow FiestaCarts to use your location to find nearby vendors.",
+          "locationAlwaysPermission": "Allow FiestaCarts to use your location to find nearby vendors even when the app is in background.",
+          "locationWhenInUsePermission": "Allow FiestaCarts to use your location to find nearby vendors while using the app."
+        }
+      ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fiestacarts.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/FiestaCarts_logo.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.fiestacarts.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
