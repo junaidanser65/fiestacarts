@@ -51,7 +51,6 @@ export default function HomeScreen({ navigation }) {
         <VendorReviews />
         <BookVendorButton />
       </ScrollView>
-      <Navigator />
     </View>
   );
 }

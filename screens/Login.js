@@ -14,7 +14,7 @@ const LoginScreen = ({ navigation }) => {
 
     if (email === storedEmail && password === storedPassword) {
       await AsyncStorage.setItem("userToken", "dummy-token");
-      navigation.replace("Home");
+      navigation.replace("Main");
     } else {
       Alert.alert("Error", "Invalid email or password");
     }
